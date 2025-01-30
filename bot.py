@@ -1418,8 +1418,6 @@ async def on_message(message: discord.Message):
         print("Failed to parse contract info")
         return
 
-    ### START EDITING HERE
-
     contract_address = result
     # Get trench bundle metadata
     trench_bundle_metadata = get_trench_bundle_metadata(contract_address)
@@ -1434,7 +1432,12 @@ async def on_message(message: discord.Message):
     print(f"Created embed for {trench_bundle_metadata['ticker']}")
 
     # Currently Held Bundles
-    currently_held_bundles = f"Currently Held Bundles: **{trench_bundle_metadata['total_holding_percentage']:.2f}%**"
+    currently_held_emoji = (
+        "✅"
+        if trench_bundle_metadata["total_holding_percentage"] < 3
+        else "⚠️" if trench_bundle_metadata["total_holding_percentage"] < 10 else "🚨"
+    )
+    currently_held_bundles = f"{currently_held_emoji} Currently Held Bundles: **{trench_bundle_metadata['total_holding_percentage']:.2f}%**"
     embed.add_field(name="Current Bundles", value=currently_held_bundles, inline=False)
 
     # Initial Bundle Stats
@@ -1445,10 +1448,19 @@ async def on_message(message: discord.Message):
     creator = trench_bundle_metadata["creator_analysis"]
 
     # Warnings (if any, shown at bottom)
+    risk_level_emoji = {
+        "LOW": "✅",
+        "MEDIUM": "⚠️",
+        "HIGH": "🚨",
+    }
+    creator_info = (
+        f"{risk_level_emoji[creator['risk_level']]} Risk Level: {creator['risk_level']}"
+    )
     if creator["warning_flags"]:
         warnings = " • ".join(flag for flag in creator["warning_flags"] if flag)
         if warnings:
-            embed.add_field(name="⚠️ Creator Warnings", value=warnings, inline=False)
+            creator_info = f"\n⚠️ Warnings: {warnings}"
+    embed.add_field(name="Creator Info", value=creator_info, inline=False)
 
     try:
         # Send reply with embed
