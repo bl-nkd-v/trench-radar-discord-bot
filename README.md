@@ -4,7 +4,7 @@ A simple Discord bot that listens for messages from Rick (a popular crypto metad
 
 ## Add to your server
 
-If you want to add this bot to your server, you can do so by clicking [this link](https://discord.com/oauth2/authorize?client_id=1328776639370366996).
+If you want to add this bot to your server, you can do so by clicking [this link](https://discord.com/oauth2/authorize?client_id=1334376887421505560).
 
 ## Features
 
@@ -34,8 +34,8 @@ If you want to add this bot to your server, you can do so by clicking [this link
 2. Clone this repository:
 
 ```bash
-git clone https://github.com/bl-nkd-v/trenchbot-discord-bot.git
-cd trenchbot-discord-bot
+git clone https://github.com/bl-nkd-v/trench-radar-discord-bot.git
+cd trench-radar-discord-bot
 ```
 
 3. Install dependencies:
