@@ -211,12 +211,6 @@ async def on_message(message: discord.Message):
             name="Current Bundles", value=currently_held_bundles, inline=False
         )
 
-        # Initial Bundle Stats
-        initial_bundle_stats = f"📦 {trench_bundle_metadata['total_bundles']} bundles, **{trench_bundle_metadata['total_percentage_bundled']:.1f}%** with **{trench_bundle_metadata['total_sol_spent']:.2f}** SOL\n"
-        embed.add_field(
-            name="Initial Bundles", value=initial_bundle_stats, inline=False
-        )
-
         # Creator Stats
         creator = trench_bundle_metadata["creator_analysis"]
 
